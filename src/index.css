@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

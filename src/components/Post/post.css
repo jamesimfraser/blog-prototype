@@ -1,0 +1,10 @@
+.post {
+  background-color: #eeeeee;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+
+.post:hover {
+  background-color: #cccccc;
+}
