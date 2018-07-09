@@ -20,6 +20,11 @@
   width: 90%;
   max-width: 768px;
   margin: 2rem auto;
+  opacity: 0;
+  transform: translate(10px, -20px) scale(0.97);
+  animation: fadeIn 0.35s 1 ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0;
 }
 
 .posts__btn {
@@ -38,4 +43,11 @@
 
 .post-preview:hover {
   background-color: #cccccc;
+}
+
+@keyframes fadeIn {
+  to {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
 }

@@ -3,16 +3,23 @@ import { GET_POSTS, FETCH, ADD_POST, REMOVE_POST, GET_COMMENTS } from "./types";
 const initialState = {
   posts: [],
   comments: [],
-  fetching: false,
+  fetching: { posts: false, comments: false },
   formActive: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH:
-      return { ...state, fetching: true };
+      return {
+        ...state,
+        fetching: { ...state.fetching, [action.payload]: true }
+      };
     case GET_POSTS:
-      return { ...state, posts: action.payload, fetching: false };
+      return {
+        ...state,
+        fetching: { ...state.fetching, posts: false },
+        posts: action.payload
+      };
     case ADD_POST:
       return {
         ...state,
@@ -27,6 +34,7 @@ export default (state = initialState, action) => {
     case GET_COMMENTS:
       return {
         ...state,
+        fetching: { ...state.fetching, comments: false },
         comments: action.payload
       };
     default:

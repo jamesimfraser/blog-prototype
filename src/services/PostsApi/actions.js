@@ -3,7 +3,8 @@ import api from "../../utils/api";
 
 export const getPosts = () => dispatch => {
   dispatch({
-    type: FETCH
+    type: FETCH,
+    payload: "posts"
   });
 
   return api("https://jsonplaceholder.typicode.com/posts")
@@ -28,6 +29,11 @@ export const removePost = id => dispatch => {
 };
 
 export const getComments = id => dispatch => {
+  dispatch({
+    type: FETCH,
+    payload: "comments"
+  });
+
   return api(
     `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
     {},

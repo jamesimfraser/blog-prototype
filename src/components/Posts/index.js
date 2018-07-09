@@ -11,7 +11,7 @@ import "./posts.css";
 
 const mapStateToProps = state => ({
   posts: state.posts.posts,
-  fetching: state.posts.fetching
+  fetching: state.posts.fetching.posts
 });
 
 class Posts extends Component {
@@ -55,8 +55,12 @@ class Posts extends Component {
         {this.props.fetching && <Loader />}
         {!this.props.fetching &&
           this.props.posts.length < 1 && <p>No posts found</p>}
-        {this.filterPosts().map(post => (
-          <div className="posts__post-container">
+        {this.filterPosts().map((post, index) => (
+          <div
+            key={`post_${index}`}
+            className="posts__post-container"
+            style={{ animationDelay: `${0.05 * index}s` }}
+          >
             <PostPreview
               post={post}
               onClick={() => {
@@ -84,14 +88,11 @@ class Posts extends Component {
             >
               <FontAwesomeIcon icon={faCopy} />
             </a>
-            <button
-              className="btn posts__add-btn"
-              onClick={this.props.toggleForm}
-            >
-              +
-            </button>
           </div>
         ))}
+        <button className="btn posts__add-btn" onClick={this.props.toggleForm}>
+          +
+        </button>
         <button onClick={() => this.toNewPage("prev")}>Prev</button>
         <button onClick={() => this.toNewPage("next")}>Next</button>
       </div>

@@ -1,17 +1,18 @@
 import Preact, { Component } from "preact";
 
+import Loader from "../Loader";
 import { connect } from "react-redux";
 import { getComments } from "../../services/PostsApi/actions";
 import "./post.css";
 
 const mapStateToProps = state => ({
   currentPost: state.app.currentPost,
-  comments: state.posts.comments
+  comments: state.posts.comments,
+  fetching: state.posts.fetching.comments
 });
 
 class Post extends Component {
   componentWillMount() {
-    this.props.comments = [];
     this.props.getComments(this.props.currentPost.id);
   }
 
@@ -25,13 +26,25 @@ class Post extends Component {
           Back to posts
         </button>
 
-        {this.props.comments.length > 0 && (
+        <h1>Comments</h1>
+
+        {this.props.fetching ? (
+          <Loader />
+        ) : (
           <div className="post__comments">
-            <h1>Comments</h1>
             {this.props.comments.map(comment => (
-              <div className="post__comment">
-                <p>{comment.name}</p>
-                <p>{comment.email}</p>
+              <div
+                className="post__comment"
+                style={{
+                  marginBottom: "2rem",
+                  padding: "1rem",
+                  borderTop: "1px solid #eeeeee"
+                }}
+              >
+                <p style={{ fontWeight: "bold", marginBottom: 0 }}>
+                  {comment.name}
+                </p>
+                <p style={{ fontSize: "1.2rem", margin: 0 }}>{comment.email}</p>
                 <p>{comment.body}</p>
               </div>
             ))}
