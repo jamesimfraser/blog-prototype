@@ -1,10 +1,11 @@
 import Preact, { Component } from "preact";
 import { connect } from "react-redux";
 
-import { addPost, toggleForm } from "../../services/Posts/actions";
+import { addPost } from "../../services/PostsApi/actions";
+import { toggleForm } from "../../services/App/actions";
 import "./new-post.css";
 
-const mapStateToProps = state => ({ active: state.posts.formActive });
+const mapStateToProps = state => ({ active: state.app.formActive });
 
 class NewPost extends Component {
   state = { post: { title: "", body: "" } };
@@ -18,6 +19,7 @@ class NewPost extends Component {
 
     this.props.addPost({ ...this.state.post });
     this.setState({ post: { title: "", body: "" } });
+    this.props.toggleForm();
   };
 
   render() {
@@ -25,8 +27,19 @@ class NewPost extends Component {
       <div
         className={`new-post ${this.props.active ? "new-post--active" : ""}`}
       >
+        <div className="new-post__background" />
         <div className="new-post__content">
-          <p onClick={this.props.toggleForm}>X</p>
+          <a
+            href=""
+            className="new-post__close"
+            onClick={evt => {
+              evt.preventDefault();
+              this.props.toggleForm();
+            }}
+          >
+            X
+          </a>
+          <h1>Add a new post</h1>
           <div className="new-post__field">
             <label htmlFor="title" className="new-post__label">
               Title

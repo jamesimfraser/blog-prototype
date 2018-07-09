@@ -1,20 +1,15 @@
-import {
-  GET_POSTS,
-  FETCH_POSTS,
-  ADD_POST,
-  REMOVE_POST,
-  TOGGLE_FORM
-} from "./types";
+import { GET_POSTS, FETCH, ADD_POST, REMOVE_POST, GET_COMMENTS } from "./types";
 
 const initialState = {
   posts: [],
+  comments: [],
   fetching: false,
   formActive: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_POSTS:
+    case FETCH:
       return { ...state, fetching: true };
     case GET_POSTS:
       return { ...state, posts: action.payload, fetching: false };
@@ -29,8 +24,11 @@ export default (state = initialState, action) => {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload)
       };
-    case TOGGLE_FORM:
-      return { ...state, formActive: !state.formActive };
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
+      };
     default:
       return state;
   }

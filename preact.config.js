@@ -13,4 +13,8 @@ export default (config, env, helpers) => {
       filter[i] = filter[i].replace("/components", "/components/*");
     }
   });
+
+  if (env.production) {
+    config.output.publicPath = "";
+  }
 };

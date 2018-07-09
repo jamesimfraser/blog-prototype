@@ -23,6 +23,9 @@
     "preact-cli": "^2.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0",
+    "@fortawesome/react-fontawesome": "^0.1.0",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
     "react-redux": "^5.0.7",

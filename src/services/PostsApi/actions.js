@@ -1,15 +1,9 @@
-import {
-  GET_POSTS,
-  FETCH_POSTS,
-  TOGGLE_FORM,
-  ADD_POST,
-  REMOVE_POST
-} from "./types";
+import { GET_POSTS, FETCH, ADD_POST, REMOVE_POST, GET_COMMENTS } from "./types";
 import api from "../../utils/api";
 
 export const getPosts = () => dispatch => {
   dispatch({
-    type: FETCH_POSTS
+    type: FETCH
   });
 
   return api("https://jsonplaceholder.typicode.com/posts")
@@ -22,8 +16,6 @@ export const getPosts = () => dispatch => {
     .catch(err => alert(err));
 };
 
-export const toggleForm = () => ({ type: TOGGLE_FORM });
-
 export const addPost = post => dispatch =>
   api("https://jsonplaceholder.typicode.com/posts", post, "POST")
     .then(response => dispatch({ type: ADD_POST, payload: response }))
@@ -32,5 +24,15 @@ export const addPost = post => dispatch =>
 export const removePost = id => dispatch => {
   return api(`https://jsonplaceholder.typicode.com/posts/${id}`, {}, "DELETE")
     .then(() => dispatch({ type: REMOVE_POST, payload: id }))
+    .catch(err => alert(err));
+};
+
+export const getComments = id => dispatch => {
+  return api(
+    `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
+    {},
+    "GET"
+  )
+    .then(response => dispatch({ type: GET_COMMENTS, payload: response }))
     .catch(err => alert(err));
 };

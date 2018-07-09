@@ -1,10 +1,6 @@
 .post {
-  background-color: #eeeeee;
-  padding: 4px 10px;
-  cursor: pointer;
-  transition: background-color 0.1s linear;
-}
-
-.post:hover {
-  background-color: #cccccc;
+  width: 95%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 2rem 0;
 }

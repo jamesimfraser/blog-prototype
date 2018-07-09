@@ -21,3 +21,21 @@
   max-width: 768px;
   margin: 2rem auto;
 }
+
+.posts__btn {
+  display: inline-block;
+  transform: scale(1.5);
+  color: #000000;
+  margin: 1rem;
+}
+
+.post-preview {
+  background-color: #eeeeee;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background-color 0.1s linear;
+}
+
+.post-preview:hover {
+  background-color: #cccccc;
+}
