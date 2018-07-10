@@ -3,6 +3,8 @@ import Preact, { Component } from "preact";
 import Loader from "../Loader";
 import { connect } from "react-redux";
 import { getComments } from "../../services/PostsApi/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
 import "./post.css";
 
 const mapStateToProps = state => ({
@@ -19,16 +21,19 @@ class Post extends Component {
   render() {
     return (
       <div className="post">
-        <h1>{this.props.currentPost.title}</h1>
-        <p>{this.props.currentPost.body}</p>
-
         <button
-          className="btn btn--cta"
+          className="btn post__back"
           onClick={() => (window.location.hash = "landing")}
         >
+          <FontAwesomeIcon
+            icon={faArrowAltCircleLeft}
+            className="post__back-icon"
+          />{" "}
           Back to posts
         </button>
 
+        <h1>{this.props.currentPost.title}</h1>
+        <p>{this.props.currentPost.body}</p>
         <h1>Comments</h1>
 
         {this.props.fetching ? (
@@ -36,18 +41,9 @@ class Post extends Component {
         ) : (
           <div className="post__comments">
             {this.props.comments.map(comment => (
-              <div
-                className="post__comment"
-                style={{
-                  marginBottom: "2rem",
-                  padding: "1rem",
-                  borderTop: "1px solid #eeeeee"
-                }}
-              >
-                <p style={{ fontWeight: "bold", marginBottom: 0 }}>
-                  {comment.name}
-                </p>
-                <p style={{ fontSize: "1.2rem", margin: 0 }}>{comment.email}</p>
+              <div className="post__comment">
+                <p className="post__comment-name">{comment.name}</p>
+                <p className="post__coment-email">{comment.email}</p>
                 <p>{comment.body}</p>
               </div>
             ))}

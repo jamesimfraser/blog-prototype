@@ -63,9 +63,9 @@ class NewPost extends Component {
             </label>
             <textarea
               id="body"
-              className="new-post__input"
+              className="new-post__input new-post__input--textarea"
               value={this.state.post.body}
-              rows={5}
+              rows="5"
               onChange={evt =>
                 this.setState(
                   state => (state.post.body = evt.currentTarget.value)

@@ -81,6 +81,10 @@
   font-size: 1.6rem;
 }
 
+.new-post__input--textarea {
+  resize: none;
+}
+
 .new-post__close {
   color: #000000;
   text-decoration: none;
