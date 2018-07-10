@@ -29,6 +29,11 @@
   animation: fadeIn 0.35s 1 ease-out;
   animation-fill-mode: forwards;
   animation-delay: 0;
+  border-top: 1px solid orange;
+}
+
+.posts__post-container:first-child {
+  border-top: none;
 }
 
 .posts__btn {
@@ -61,14 +66,13 @@
 }
 
 .post-preview {
-  background-color: #eeeeee;
   padding: 4px 10px;
   cursor: pointer;
-  transition: background-color 0.1s linear;
+  transition: transform 0.15s ease-out;
 }
 
 .post-preview:hover {
-  background-color: #cccccc;
+  transform: scale(1.01) translateY(-1px);
 }
 
 @keyframes fadeIn {
