@@ -22,7 +22,10 @@ class Post extends Component {
         <h1>{this.props.currentPost.title}</h1>
         <p>{this.props.currentPost.body}</p>
 
-        <button onClick={() => (window.location.hash = "landing")}>
+        <button
+          className="btn btn--cta"
+          onClick={() => (window.location.hash = "landing")}
+        >
           Back to posts
         </button>
 

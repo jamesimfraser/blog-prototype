@@ -1,7 +1,12 @@
 import Preact, { Component } from "preact";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faCopy } from "@fortawesome/free-regular-svg-icons";
+import {
+  faTrashAlt,
+  faCopy,
+  faArrowAltCircleRight,
+  faArrowAltCircleLeft
+} from "@fortawesome/free-regular-svg-icons";
 
 import { getPosts, addPost, removePost } from "../../services/PostsApi/actions";
 import { toggleForm, setPost } from "../../services/App/actions";
@@ -93,8 +98,24 @@ class Posts extends Component {
         <button className="btn posts__add-btn" onClick={this.props.toggleForm}>
           +
         </button>
-        <button onClick={() => this.toNewPage("prev")}>Prev</button>
-        <button onClick={() => this.toNewPage("next")}>Next</button>
+        <div className="posts__pagination-wrapper">
+          <button
+            onClick={() => this.toNewPage("prev")}
+            className="btn posts__pagination"
+          >
+            <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+          </button>
+          <p className="posts__pagination-copy">
+            Page {this.state.pageIndex + 1} of{" "}
+            {Math.ceil(this.props.posts.length / this.postsPerPage)}
+          </p>
+          <button
+            onClick={() => this.toNewPage("next")}
+            className="btn posts__pagination"
+          >
+            <FontAwesomeIcon icon={faArrowAltCircleRight} />
+          </button>
+        </div>
       </div>
     );
   }

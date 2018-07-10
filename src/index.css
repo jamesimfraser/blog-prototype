@@ -21,4 +21,19 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+  padding: 0;
+  background-color: transparent;
+}
+
+.btn--cta {
+  background-color: #68bbff;
+  border-radius: 5px;
+  border: 1px solid #4b98d8;
+  color: #ffffff;
+  font-size: 1.4rem;
+  padding: 1rem 2.5rem;
+}
+
+.btn--cta:hover {
+  background-color: #2d81c5;
 }

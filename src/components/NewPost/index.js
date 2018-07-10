@@ -74,7 +74,9 @@ class NewPost extends Component {
             />
           </div>
 
-          <button onClick={this.onSubmit}>Submit</button>
+          <button class="btn btn--cta" onClick={this.onSubmit}>
+            Submit
+          </button>
         </div>
       </div>
     );
