@@ -55,67 +55,76 @@ class Posts extends Component {
   }
 
   render() {
+    if (this.props.fetching) {
+      return <Loader />;
+    }
+
     return (
       <div className="posts">
-        {this.props.fetching && <Loader />}
-        {!this.props.fetching &&
-          this.props.posts.length < 1 && <p>No posts found</p>}
-        {this.filterPosts().map((post, index) => (
-          <div
-            key={`post_${index}`}
-            className="posts__post-container"
-            style={{ animationDelay: `${0.05 * index}s` }}
-          >
-            <PostPreview
-              post={post}
-              onClick={() => {
-                this.props.setPost(post);
-                window.location.hash = "fullPost";
-              }}
-            />
-            <a
-              href=""
-              onClick={evt => {
-                evt.preventDefault();
-                this.props.removePost(post.id);
-              }}
-              className="posts__btn"
-            >
-              <FontAwesomeIcon icon={faTrashAlt} color="#ff0000" />
-            </a>
-            <a
-              href=""
-              onClick={evt => {
-                evt.preventDefault();
-                this.props.addPost({ ...post, id: null });
-              }}
-              className="posts__btn"
-            >
-              <FontAwesomeIcon icon={faCopy} />
-            </a>
+        {this.props.posts.length < 1 ? (
+          <p>No posts found</p>
+        ) : (
+          <div>
+            {this.filterPosts().map((post, index) => (
+              <div
+                key={`post_${index}`}
+                className="posts__post-container"
+                style={{ animationDelay: `${0.05 * index}s` }}
+              >
+                <PostPreview
+                  post={post}
+                  onClick={() => {
+                    this.props.setPost(post);
+                    window.location.hash = "fullPost";
+                  }}
+                />
+                <a
+                  href=""
+                  onClick={evt => {
+                    evt.preventDefault();
+                    this.props.removePost(post.id);
+                  }}
+                  className="posts__btn"
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} color="#ff0000" />
+                </a>
+                <a
+                  href=""
+                  onClick={evt => {
+                    evt.preventDefault();
+                    this.props.addPost({ ...post, id: null });
+                  }}
+                  className="posts__btn"
+                >
+                  <FontAwesomeIcon icon={faCopy} />
+                </a>
+              </div>
+            ))}
           </div>
-        ))}
+        )}
         <button className="btn posts__add-btn" onClick={this.props.toggleForm}>
           +
         </button>
-        <div className="posts__pagination-wrapper">
-          <button
-            onClick={() => this.toNewPage("prev")}
-            className="btn posts__pagination"
-          >
-            <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-          </button>
-          <p className="posts__pagination-copy">
-            Page {this.state.pageIndex + 1} of{" "}
-            {Math.ceil(this.props.posts.length / this.postsPerPage)}
-          </p>
-          <button
-            onClick={() => this.toNewPage("next")}
-            className="btn posts__pagination"
-          >
-            <FontAwesomeIcon icon={faArrowAltCircleRight} />
-          </button>
-        </div>
+        {this.props.posts.length > this.postsPerPage && (
+          <div className="posts__pagination-wrapper">
+            <button
+              onClick={() => this.toNewPage("prev")}
+              className="btn posts__pagination"
+            >
+              <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+            </button>
+            <p className="posts__pagination-copy">
+              Page {this.state.pageIndex + 1} of{" "}
+              {Math.ceil(this.props.posts.length / this.postsPerPage)}
+            </p>
+            <button
+              onClick={() => this.toNewPage("next")}
+              className="btn posts__pagination"
+            >
+              <FontAwesomeIcon icon={faArrowAltCircleRight} />
+            </button>
+          </div>
+        )}
       </div>
     );
   }
