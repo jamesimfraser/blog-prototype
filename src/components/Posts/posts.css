@@ -51,6 +51,10 @@
   margin-bottom: 0.3rem;
 }
 
+.posts__pagination--fade {
+  opacity: 0.5;
+}
+
 .posts__pagination-copy {
   text-align: center;
   margin: 0 3rem;

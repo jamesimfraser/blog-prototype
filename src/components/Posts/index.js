@@ -50,7 +50,8 @@ class Posts extends Component {
 
     this.setState(
       state =>
-        dir === "next" ? (state.pageIndex += 1) : (state.pageIndex -= 1)
+        dir === "next" ? (state.pageIndex += 1) : (state.pageIndex -= 1),
+      () => window.scrollTo(0, 0)
     );
   }
 
@@ -58,6 +59,8 @@ class Posts extends Component {
     if (this.props.fetching) {
       return <Loader />;
     }
+
+    const totalPages = Math.ceil(this.props.posts.length / this.postsPerPage);
 
     return (
       <div className="posts">
@@ -67,7 +70,7 @@ class Posts extends Component {
           <div>
             {this.filterPosts().map((post, index) => (
               <div
-                key={`post_${index}`}
+                key={`post_${post.id}`}
                 className="posts__post-container"
                 style={{ animationDelay: `${0.05 * index}s` }}
               >
@@ -109,17 +112,22 @@ class Posts extends Component {
           <div className="posts__pagination-wrapper">
             <button
               onClick={() => this.toNewPage("prev")}
-              className="btn posts__pagination"
+              className={`btn posts__pagination ${
+                this.state.pageIndex <= 0 ? "posts__pagination--fade" : ""
+              }`}
             >
               <FontAwesomeIcon icon={faArrowAltCircleLeft} />
             </button>
             <p className="posts__pagination-copy">
-              Page {this.state.pageIndex + 1} of{" "}
-              {Math.ceil(this.props.posts.length / this.postsPerPage)}
+              Page {this.state.pageIndex + 1} of {totalPages}
             </p>
             <button
               onClick={() => this.toNewPage("next")}
-              className="btn posts__pagination"
+              className={`btn posts__pagination ${
+                this.state.pageIndex + 1 >= totalPages
+                  ? "posts__pagination--fade"
+                  : ""
+              }`}
             >
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </button>

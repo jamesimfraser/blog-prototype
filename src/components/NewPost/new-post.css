@@ -31,21 +31,34 @@
 
 .new-post__content {
   background-color: #ffffff;
-  height: 100%;
   width: 100%;
-  padding: 1rem 2.5%;
+  height: 100%;
+  padding: 4rem 5%;
   max-width: 768px;
   margin: 0 auto;
   position: relative;
-  transition: transform 0.5s ease-in-out, visibility 0s linear 0.5s;
-  transform: translateY(100%);
+  transition: visibility 0s linear 0.35s, transform 0.35s ease-in-out;
+  transform: translateY(-100%);
   visibility: hidden;
+  top: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .new-post__content {
+    height: auto;
+  }
 }
 
 .new-post--active .new-post__content {
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.35s ease-in-out;
   transform: translateY(0);
   visibility: visible;
+}
+
+@media screen and (min-width: 768px) {
+  .new-post--active .new-post__content {
+    transform: translateY(0) translateY(5rem);
+  }
 }
 
 .new-post__field {
