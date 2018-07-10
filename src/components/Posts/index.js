@@ -1,19 +1,14 @@
 import Preact, { Component } from "preact";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrashAlt,
-  faCopy,
-  faArrowAltCircleRight,
-  faArrowAltCircleLeft
-} from "@fortawesome/free-regular-svg-icons";
-
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faCopy } from "@fortawesome/free-regular-svg-icons";
 
 import { getPosts, addPost, removePost } from "../../services/PostsApi/actions";
-import { toggleForm, setPost } from "../../services/App/actions";
+import { setPost } from "../../services/App/actions";
 import PostPreview from "./post-preview";
 import Loader from "../Loader";
+import Pagination from "./pagination";
+import NewPostButton from "./new-post-button";
 import "./posts.css";
 
 const mapStateToProps = state => ({
@@ -39,7 +34,7 @@ class Posts extends Component {
     return posts.slice(startIndex, startIndex + this.postsPerPage);
   }
 
-  toNewPage(dir) {
+  toNewPage = dir => {
     const { pageIndex } = this.state;
     const { posts } = this.props;
 
@@ -55,7 +50,7 @@ class Posts extends Component {
         dir === "next" ? (state.pageIndex += 1) : (state.pageIndex -= 1),
       () => window.scrollTo(0, 0)
     );
-  }
+  };
 
   render() {
     if (this.props.fetching) {
@@ -107,33 +102,13 @@ class Posts extends Component {
             ))}
           </div>
         )}
-        <button className="btn posts__add-btn" onClick={this.props.toggleForm}>
-          <FontAwesomeIcon icon={faPlus} color="#ffffff" />
-        </button>
+        <NewPostButton />
         {this.props.posts.length > this.postsPerPage && (
-          <div className="posts__pagination-wrapper">
-            <button
-              onClick={() => this.toNewPage("prev")}
-              className={`btn posts__pagination ${
-                this.state.pageIndex <= 0 ? "posts__pagination--fade" : ""
-              }`}
-            >
-              <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-            </button>
-            <p className="posts__pagination-copy">
-              Page {this.state.pageIndex + 1} of {totalPages}
-            </p>
-            <button
-              onClick={() => this.toNewPage("next")}
-              className={`btn posts__pagination ${
-                this.state.pageIndex + 1 >= totalPages
-                  ? "posts__pagination--fade"
-                  : ""
-              }`}
-            >
-              <FontAwesomeIcon icon={faArrowAltCircleRight} />
-            </button>
-          </div>
+          <Pagination
+            onClick={this.toNewPage}
+            totalPages={totalPages}
+            currentPage={this.state.pageIndex + 1}
+          />
         )}
       </div>
     );
@@ -142,5 +117,5 @@ class Posts extends Component {
 
 export default connect(
   mapStateToProps,
-  { getPosts, removePost, toggleForm, addPost, setPost }
+  { getPosts, removePost, addPost, setPost }
 )(Posts);

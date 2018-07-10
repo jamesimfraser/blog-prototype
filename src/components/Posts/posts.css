@@ -4,24 +4,6 @@
   margin: 0 auto;
 }
 
-.posts__add-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #68bbff;
-  border-radius: 100%;
-  height: 60px;
-  width: 60px;
-  color: #ffffff;
-  font-size: 2rem;
-  font-family: "Helvetica-Neue", sans-serif;
-  transition: background-color 0.15s linear;
-}
-
-.posts__add-btn:hover {
-  background-color: #2d81c5;
-}
-
 .posts__post-container {
   margin: 2rem auto;
   opacity: 0;
@@ -43,7 +25,7 @@
   margin: 1rem;
 }
 
-.posts__pagination-wrapper {
+.pagination {
   max-width: 320px;
   display: flex;
   justify-content: center;
@@ -51,16 +33,16 @@
   margin: 0 auto;
 }
 
-.posts__pagination {
+.pagination__btn {
   transform: scale(3);
   margin-bottom: 0.3rem;
 }
 
-.posts__pagination--fade {
+.pagination__btn--fade {
   opacity: 0.5;
 }
 
-.posts__pagination-copy {
+.pagination-copy {
   text-align: center;
   margin: 0 3rem;
 }
@@ -73,6 +55,24 @@
 
 .post-preview:hover {
   transform: scale(1.01) translateY(-1px);
+}
+
+.new-post-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #68bbff;
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  color: #ffffff;
+  font-size: 2rem;
+  font-family: "Helvetica-Neue", sans-serif;
+  transition: background-color 0.15s linear;
+}
+
+.new-post-btn:hover {
+  background-color: #2d81c5;
 }
 
 @keyframes fadeIn {
