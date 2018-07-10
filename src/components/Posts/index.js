@@ -8,6 +8,8 @@ import {
   faArrowAltCircleLeft
 } from "@fortawesome/free-regular-svg-icons";
 
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 import { getPosts, addPost, removePost } from "../../services/PostsApi/actions";
 import { toggleForm, setPost } from "../../services/App/actions";
 import PostPreview from "./post-preview";
@@ -106,7 +108,7 @@ class Posts extends Component {
           </div>
         )}
         <button className="btn posts__add-btn" onClick={this.props.toggleForm}>
-          +
+          <FontAwesomeIcon icon={faPlus} color="#ffffff" />
         </button>
         {this.props.posts.length > this.postsPerPage && (
           <div className="posts__pagination-wrapper">

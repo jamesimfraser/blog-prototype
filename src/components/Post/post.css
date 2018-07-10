@@ -13,8 +13,9 @@
 }
 
 .post__back-icon {
-  transform: scale(2);
-  margin-right: 1rem;
+  font-size: 1.6rem;
+  margin-right: 0.6rem;
+  vertical-align: middle;
 }
 
 .post__comment {

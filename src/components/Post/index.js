@@ -4,7 +4,7 @@ import Loader from "../Loader";
 import { connect } from "react-redux";
 import { getComments } from "../../services/PostsApi/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./post.css";
 
 const mapStateToProps = state => ({
@@ -25,10 +25,7 @@ class Post extends Component {
           className="btn post__back"
           onClick={() => (window.location.hash = "landing")}
         >
-          <FontAwesomeIcon
-            icon={faArrowAltCircleLeft}
-            className="post__back-icon"
-          />{" "}
+          <FontAwesomeIcon icon={faArrowLeft} className="post__back-icon" />{" "}
           Back to posts
         </button>
 
